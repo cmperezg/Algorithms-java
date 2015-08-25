@@ -6,10 +6,12 @@ public class Sorts {
 
 	public static void main(String[] args) {
 		
-		final int[] unsorted = {2,7,10,6,1,4,9,5,3,8};
+		final int[] unsorted = {2,7,10,6,3,4,9,5,1,8};
 		//insertionSort(unsorted);
-		//selectionSort(unsorted);
-		bubbleSort(unsorted);
+		selectionSort(unsorted);
+		//bubbleSort(unsorted);
+		//quickSort(unsorted);
+		//mergeSort(unsorted);
 		
 		printArray(unsorted);
 
@@ -37,9 +39,7 @@ public class Sorts {
 			}
 			
 			if(imin != i){
-				int min = arr[imin];
-				arr[imin] = arr[i];
-				arr[i] = min;
+				swap(arr,imin,i);
 			}
 		}
 	}
@@ -50,14 +50,119 @@ public class Sorts {
 			swapped = false;
 			for(int i = 1; i< arr.length; i++){
 				if(arr[i] < arr[i-1]){
-					int arri = arr[i];
-					arr[i] = arr[i-1];
-					arr[i-1] = arri;
+					swap(arr, i, i-1);
 					swapped=true;
 				}
 			}
 		}while(swapped);
 	}
+	
+	public static void quickSort(int arr[]){
+		quickSort(arr,0,arr.length-1);
+	}
+	
+	private static void quickSort(int arr[], int left, int right) {
+		
+	      int index = partition(arr, left, right);
+	      if (left < index - 1)
+	            quickSort(arr, left, index - 1);
+	      if (index < right)
+	            quickSort(arr, index, right);
+	      
+	      
+	}
+	
+	static int partition(int arr[], int left, int right)
+	{
+	      int i = left, j = right;
+	      int pivot = arr[(left + right) / 2];
+	      while (i <= j) {
+	            while (arr[i] < pivot)
+	                  i++;
+	            while (arr[j] > pivot)
+	                  j--;
+	            if (i <= j) {
+	            	  swap(arr,i,j);
+	                  i++;
+	                  j--;
+	                  
+	            }
+	      };
+
+	      return i;
+	}
+	
+	
+	public static void mergeSort(int[] arr)
+	{
+		mergeSort(arr, 0, arr.length-1);
+	}
+	
+	private static void mergeSort(int[] arr, int left, int right)
+	{
+		if (left < right)
+		{
+			int mid = (left + right)/2;
+			mergeSort(arr, left, mid);
+			mergeSort(arr, mid+1, right);
+			merge(arr, left, mid, right);
+		}
+	}
+	
+	public static void merge(int[] data, int left, int mid, int right)
+	{
+		int[] A;
+		A = new int[mid-left+2];
+
+		int[] B;
+		B = new int[right-mid+1];
+
+		int i;
+
+		// Copy the first half into A
+		for(i = left; i <= mid; i++)
+			A[i-left] = data[i];
+
+		// Place infinity in the last slot of A
+		A[A.length-1] = Integer.MAX_VALUE;
+
+		// Copy the second half into B
+		for(i = mid+1; i <= right; i++)
+			B[i-(mid+1)] = data[i];
+
+		// Place infinity in the last slot of B
+		B[B.length-1] = Integer.MAX_VALUE;
+		
+		i = 0;		// index for A
+		int j = 0;	// index for B
+		int l;
+
+		// A and B are merged back into data
+		for(l = left; l <= right; l++)
+		{
+			if(A[i] <= B[j])
+			{
+				data[l] = A[i];
+				i++;
+			}
+			else
+			{
+				data[l] = B[j];
+				j++;
+			}
+		}		
+
+
+	}
+
+	//Common Methods
+
+	public static void swap(int[] arr, int x, int y)
+	{
+		int temp = arr[x];
+		arr[x] = arr[y];
+		arr[y] = temp;
+	} 
 	
 	public static void printArray(int[] arr){
 		
