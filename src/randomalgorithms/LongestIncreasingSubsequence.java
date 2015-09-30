@@ -41,7 +41,7 @@ public class LongestIncreasingSubsequence {
 			previndex = aa[previndex][1];
 		}
 		
-		return LIS;
+		return LIS; 
 	}
 	
 	static void printaa(int[][] aa){
