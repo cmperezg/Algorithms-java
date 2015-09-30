@@ -8,10 +8,10 @@ public class Sorts {
 		
 		final int[] unsorted = {2,7,10,6,3,4,9,5,1,8};
 		//insertionSort(unsorted);
-		selectionSort(unsorted);
+		//selectionSort(unsorted);
 		//bubbleSort(unsorted);
 		//quickSort(unsorted);
-		//mergeSort(unsorted);
+		mergeSort(unsorted);
 		
 		printArray(unsorted);
 
@@ -109,7 +109,7 @@ public class Sorts {
 		}
 	}
 	
-	public static void merge(int[] data, int left, int mid, int right)
+	public static void merge(int[] arr, int left, int mid, int right)
 	{
 		int[] A;
 		A = new int[mid-left+2];
@@ -121,14 +121,14 @@ public class Sorts {
 
 		// Copy the first half into A
 		for(i = left; i <= mid; i++)
-			A[i-left] = data[i];
+			A[i-left] = arr[i];
 
 		// Place infinity in the last slot of A
 		A[A.length-1] = Integer.MAX_VALUE;
 
 		// Copy the second half into B
 		for(i = mid+1; i <= right; i++)
-			B[i-(mid+1)] = data[i];
+			B[i-(mid+1)] = arr[i];
 
 		// Place infinity in the last slot of B
 		B[B.length-1] = Integer.MAX_VALUE;
@@ -142,12 +142,12 @@ public class Sorts {
 		{
 			if(A[i] <= B[j])
 			{
-				data[l] = A[i];
+				arr[l] = A[i];
 				i++;
 			}
 			else
 			{
-				data[l] = B[j];
+				arr[l] = B[j];
 				j++;
 			}
 		}		
